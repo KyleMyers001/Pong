@@ -1,0 +1,54 @@
+.btn {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 4px;
+  padding: 10px 20px;
+  transition: background-color 0.2s;
+}
+
+.btn--primary {
+  background-color: var(--site-primary);
+  border: darken(var(--site-primary), 10%);
+  color: white;
+}
+
+.btn--primary:hover {
+  background-color: var(--site-primary-hover);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 100%;
+  position: relative;
+  width: 1300px;
+}
+
+.has-text-centered {
+  text-align: center;
+}
+
+.is-primary,
+.is-primary,
+.is-primary {
+  background-color: var(--site-primary);
+  color: white;
+}
+
+.is-primary a,
+.is-primary button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  text-decoration: none;
+}
+
+.is-primary a:hover,
+.is-primary button:hover {
+  background-color: var(--site-primary-hover);
+}
+
+.section {
+  padding: 32px 0;
+}

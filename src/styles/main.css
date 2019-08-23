@@ -1,0 +1,28 @@
+@import './partials/variables.css';
+@import './partials/utilities.css';
+@import './partials/header.css';
+@import './partials/footer.css';
+
+body,
+html {
+  color: var(--text-dark);
+  font-family: 'Source Sans Pro', TimesNewRoman, 'Times New Roman';
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  display: inline-block;
+}
+
+button {
+  cursor: pointer;
+}
+
+.canvas {
+  border-radius: 6px;
+}
+
+.canvas--pong {
+  background-color: #111;
+}
