@@ -2,6 +2,6 @@
 Pong
 
 
-The AI not being beatable is a feature not a bug.
+The AI's unbeatability is a feature not a bug.
 
 https://kylemyers-pong.netlify.app/
