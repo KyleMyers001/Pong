@@ -1,8 +1,11 @@
 import AI from '../classes/AI';
 import Ball from '../classes/Ball';
 import Player from '../classes/Player';
-import Score from '../classes//Score';
+import Score from '../classes/Score';
 import * as React from 'react';
+import Point from '../interfaces/Point';
+import Size from '../interfaces/Size';
+import Velocity from '../interfaces/Velocity';
 
 // TODO: Refactor code, remove functionality out of class component. 
 // Use React hooks, and modularize the code.
@@ -25,7 +28,6 @@ class Pong extends React.Component {
   context: any;
   player: Player;
   playerScore: Score;
-  predictiveBall: Ball; // Used by the AI for predicting the ball's inevitable location.
   gameHeader: React.RefObject<HTMLDivElement>;
   constructor(props: any) {
     super(props);
@@ -60,76 +62,47 @@ class Pong extends React.Component {
     )
   }
 
+  getCanvasSize() { 
+    return { width: this.canvas.width, height: this.canvas.height };
+  }
+
   generateAIScore(): Score {
-    let x = this.canvas.width / 2 - 100;
-    let y = 60;
-    let xVelocity = 0;
-    let yVelocity = 5;
-    let color = '#ffffff';
-    return new Score(color, this.context, '30px Arial', 0, x, y);
+    let point = { x: this.canvas.width / 2 - 100, y: 60 };
+    return new Score(0, '#ffffff', this.context, '30px Arial', point);
   }
 
   generateBall(): Ball {
-    let size = 20;
-    let x = this.canvas.width / 2;
-    let y = this.canvas.height / 2;
-    let xVelocity = 10;
-    let yVelocity = 10;
-    let color = '#ffffff';
-    return new Ball(color, this.context, x, y, xVelocity, yVelocity, size, size, this.canvas.width, this.canvas.height);
+    let point = { x: this.canvas.width / 2, y: this.canvas.height / 2 };
+    let velocity = { x: 10, y: 10 };
+    let size = { width: 20, height: 20 };
+    return new Ball('#ffffff', this.context, point, size, this.getCanvasSize(), velocity, );
   }
 
   generatePlayerScore(): Score {
-    let x = this.canvas.width / 2 + 100;
-    let y = 60;
-    let xVelocity = 0;
-    let yVelocity = 5;
-    let color = '#ffffff';
-    return new Score(color, this.context, '30px Arial', 0, x, y);
+    let point = { x: this.canvas.width / 2 + 100, y: 60 };
+    return new Score(0, '#ffffff', this.context, '30px Arial', point);
   }
 
   generateAI(): AI {
-    let height = 80;
-    let width = 20;
-    let x = 20;
-    let y = this.canvas.height / 2 - (height / 2);
-    let xVelocity = 0;
-    let yVelocity = 10;
-    let color = '#ffffff';
-    return new AI(color, this.context, x, y, xVelocity, yVelocity, width, height, this.canvas.width, this.canvas.height);
+    let velocity = { x: 0, y: 10 };
+    let size = { width: 20, height: 80 };
+    let point = { x: 20, y: this.canvas.height / 2 - (size.height / 2)};
+    return new AI('#ffffff', this.context, point, size, velocity);
   }
 
   generatePlayer(): Player {
-    let height = 80;
-    let width = 20;
-    let x = this.canvas.width - width - 20;
-    let y = this.canvas.height / 2 - (height / 2);
-    let xVelocity = 0;
-    let yVelocity = 15;
-    let color = '#ffffff';
-    return new Player(color, this.context, x, y, xVelocity, yVelocity, width, height, this.canvas.width, this.canvas.height);
-  }
-
-  generatePredictiveBall(): Ball { 
-    // This is what the AI follows.
-    // It should spawn where the current ball is when the player and the ball connect.
-    // The speed of this ball should be slightly faster, and going in the same direction.
-    // let scale = this.canvas.width / 15;
-    let size = 20;
-    let x = this.ball.x;
-    let y = this.ball.y;
-    let xVelocity = 15;
-    let yVelocity = 15;
-    let color = '#FF0000';
-    return new Ball(color, this.context, x, y, xVelocity, yVelocity, size, size, this.canvas.width, this.canvas.height);
+    let size = { width: 20, height: 80 }
+    let point = { x: this.canvas.width - size.width - 20, y: this.canvas.height / 2 - (size.height / 2) };
+    let velocity = { x: 0, y: 15 };
+    return new Player('#ffffff', this.context, point, size, this.getCanvasSize(), velocity);
   }
 
   animate() {
     if (this.active) {
-      let collidedWithAi = this.detectCollision(this.ai.x, this.ai.y, this.ball.x, this.ball.y);
-      let collidedWithPlayer = this.detectCollision(this.player.x, this.player.y, this.ball.x, this.ball.y);
-      let aiScored = (this.ball.x + this.ball.width) >= this.canvas.width;
-      let playerScored = this.ball.x <= 0;
+      let collidedWithAi = this.detectCollision(this.ai.point, this.ball.point);
+      let collidedWithPlayer = this.detectCollision(this.player.point, this.ball.point);
+      let aiScored = (this.ball.point.x + this.ball.size.width) >= this.canvas.width;
+      let playerScored = this.ball.point.x <= 0;
       if (aiScored) {
         this.aiScore.amount += 1;
         this.ball = this.generateBall();
@@ -139,18 +112,7 @@ class Pong extends React.Component {
       }
 
       if (collidedWithAi || collidedWithPlayer) {
-        this.ball.xVelocity = -this.ball.xVelocity;
-      }
-
-      if(collidedWithPlayer) { // TODO: Figure out what I was doing with the predictive ball.  
-        // This code is likely redundant (not working)
-        // generate predictive ball
-        this.predictiveBall = this.generatePredictiveBall();
-      }
-
-      if(typeof(this.predictiveBall) !== 'undefined') {
-        this.predictiveBall.update();
-        console.log(this.predictiveBall);
+        this.ball.velocity.x = -this.ball.velocity.x;
       }
 
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -163,13 +125,13 @@ class Pong extends React.Component {
     }
   }
 
-  detectCollision(x1: number, y1: number, x2: number, y2: number) {
-    let xDistance = x2 - x1;
-    let yDistance = y2 - y1;
+  detectCollision(point1: Point, point2: Point) {
+    let xDistance = point2.x - point1.x;
+    let yDistance = point2.y - point1.y;
     let collision = false;
 
-    const horizontalCheck = Math.abs(xDistance) < this.ai.width;
-    const verticalCheck = yDistance < this.ai.height && yDistance > -this.ball.height;
+    const horizontalCheck = Math.abs(xDistance) < this.ai.size.width;
+    const verticalCheck = yDistance < this.ai.size.height && yDistance > -this.ball.size.height;
     if (horizontalCheck && verticalCheck) {
       collision = true;
     }

@@ -1,12 +1,18 @@
 import Rectangle from './Rectangle';
-import { start } from 'repl';
+import Point from '../interfaces/Point';
+import Size from '../interfaces/Size';
+import Velocity from '../interfaces/Velocity';
 
 class Player extends Rectangle {
   active: boolean;
   direction: string;
-  constructor(color: string, context: any, x: number, y: number, xVelocity: number, yVelocity: number, width: number, height: number, canvasWidth: number, canvasHeight: number) {
-    super(color, context, x, y, xVelocity, yVelocity, width, height, canvasWidth, canvasHeight);
+  canvasSize: Size;
+  velocity: Velocity;
+  constructor(color: string, context: any, point: Point, size: Size, canvaSize: Size, velocity: Velocity) {
+    super(color, context, point, size);
     this.active = true;
+    this.canvasSize = canvaSize;
+    this.velocity = velocity;
 
     window.addEventListener('keydown', (e) => {
       this.startAnimation(e);
@@ -21,10 +27,10 @@ class Player extends Rectangle {
   startAnimation(e: KeyboardEvent): void {
     if (this.active) {
       const key = e.key.toLowerCase();
-      if (key === 'w' && this.y > this.yVelocity) {
+      if (key === 'w' && this.point.y > this.velocity.y) {
         this.direction = 'up';
       }
-      else if (key === 's' && this.y < (this.canvasHeight - this.height - this.yVelocity)) {
+      else if (key === 's' && this.point.y < (this.canvasSize.height - this.size.height - this.velocity.y)) {
         this.direction = 'down';
       }
     }
@@ -37,14 +43,14 @@ class Player extends Rectangle {
   }
 
   draw(): void {
-    if(this.direction === 'up'  && this.y > this.yVelocity) {
-      this.y -= this.yVelocity;
-    } else if(this.direction === 'down' && this.y < (this.canvasHeight - this.height - this.yVelocity)) {
-      this.y += this.yVelocity;
+    if(this.direction === 'up'  && this.point.y > this.velocity.y) {
+      this.point.y -= this.velocity.y;
+    } else if(this.direction === 'down' && this.point.y < (this.canvasSize.height - this.size.height - this.velocity.y)) {
+      this.point.y += this.velocity.y;
     }
 
     this.context.beginPath()
-    this.context.rect(this.x, this.y, this.width, this.height);
+    this.context.rect(this.point.x, this.point.y, this.size.width, this.size.height);
     this.context.fillStyle = this.color;
     this.context.fill();
     this.context.stroke();

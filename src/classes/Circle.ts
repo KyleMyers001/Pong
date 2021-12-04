@@ -1,24 +1,23 @@
+import Point from "../interfaces/Point";
+import Velocity from "../interfaces/Velocity";
+
 class Circle {
   color: string;
   context: any;
   radius: number;
-  x: number;
-  xVelocity: number;
-  y: number;
-  yVelocity: number;
-  constructor(color: string, context: any, radius: number, x: number, y: number, xVelocity: number, yVelocity: number) {
+  point: Point;
+  velocity: Velocity;
+  constructor(color: string, context: any, radius: number, point: Point, velocity: Velocity) {
     this.color = color;
     this.context = context;
     this.radius = radius;
-    this.x = x;
-    this.xVelocity = xVelocity;
-    this.y = y;
-    this.yVelocity = yVelocity;
+    this.point = point;
+    this.velocity = velocity;
   }
 
   draw(): void {
     this.context.beginPath();
-    this.context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    this.context.arc(this.point.x, this.point.y, this.radius, 0, Math.PI * 2, false);
     this.context.strokeStyle = 'white';
     this.context.stroke();
     this.context.fillStyle = this.color;
