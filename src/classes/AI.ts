@@ -11,13 +11,14 @@ class AI extends Rectangle {
     this.velocity = velocity;
   }
   
-  moveTowardsBall(ball: Ball): void {
+  moveTowardsBall(ball: Ball): void { // TODO: Improve solution for making AI beatable.
     // if ball.y + ball.height is greater than canvasheight
+    const randomVelocity = this.velocity.y - Math.floor((this.velocity.y / 3) * Math.random());
     if(ball.point.y > this.point.y) {
-      this.point.y += this.velocity.y;
+      this.point.y += randomVelocity;
     }
     else {
-      this.point.y -= this.velocity.y;
+      this.point.y -= randomVelocity;
     }
 
     this.draw();

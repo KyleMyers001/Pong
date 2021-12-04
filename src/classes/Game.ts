@@ -3,6 +3,12 @@ import Ball from '../classes/Ball';
 import GameScore from '../classes/GameScore';
 import Player from '../classes/Player';
 
+// TODO: Need to add winning conditions
+
+// TODO: Should add feature to display control scheme
+
+// TODO: Make the AI possible to beat
+
 class Game {
   ai: AI;
   active: boolean;
@@ -27,22 +33,22 @@ class Game {
 
   createBall(): Ball {
     let point = { x: this.canvas.width / 2, y: this.canvas.height / 2 };
-    let velocity = { x: 10, y: 10 };
-    let size = { width: 20, height: 20 };
+    let velocity = { x: 15, y: 15 };
+    let size = { width: 25, height: 25 };
     return new Ball('#ffffff', this.context, point, size, this.getCanvasSize(), velocity, );
   }  
 
   createPlayer(): Player {
-    let size = { width: 20, height: 80 }
-    let point = { x: this.canvas.width - size.width - 20, y: this.canvas.height / 2 - (size.height / 2) };
+    let size = { width: 25, height: 100 }
+    let point = { x: this.canvas.width - size.width - size.width, y: this.canvas.height / 2 - (size.height / 2) };
     let velocity = { x: 0, y: 15 };
     return new Player('#ffffff', this.context, point, size, this.getCanvasSize(), velocity);
   }
 
   createAI(): AI {
-    let velocity = { x: 0, y: 10 };
-    let size = { width: 20, height: 80 };
-    let point = { x: 20, y: this.canvas.height / 2 - (size.height / 2)};
+    let velocity = { x: 0, y: 15 };
+    let size = { width: 25, height: 100 };
+    let point = { x: 25, y: this.canvas.height / 2 - (size.height / 2)};
     return new AI('#ffffff', this.context, point, size, velocity);
   }
 

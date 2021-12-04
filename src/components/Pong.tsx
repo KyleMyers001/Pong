@@ -1,9 +1,6 @@
 import Game from '../classes/Game';
 import React, { useEffect, useRef, useState } from 'react';
 
-// TODO: Need to add winning conditions
-
-// TODO: Should add feature to display control scheme
 const Pong = () => {
   const canvasRef = useRef(null);
   const gameHeaderRef = useRef(null);
