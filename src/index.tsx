@@ -1,6 +1,6 @@
 import './styles/main.css';
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import App from './components/App';
+import Pong from './components/Pong';
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+ReactDOM.render(<Pong />, document.querySelector('#root'));
