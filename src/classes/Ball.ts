@@ -6,10 +6,23 @@ import Velocity from '../interfaces/Velocity';
 class Ball extends Rectangle {
   canvasSize: Size;
   velocity: Velocity;
+  
   constructor(color: string, context: any, point: Point, size: Size, canvaSize: Size, velocity: Velocity) {
     super(color, context, point, size);
     this.canvasSize = canvaSize;
     this.velocity = velocity;
+  }
+
+  detectCollision(point: Point, size: Size) {
+    const xDistance = this.point.x - point.x;
+    const yDistance = this.point.y - point.y;
+    const horizontalCheck = Math.abs(xDistance) < size.width;
+    const verticalCheck = Math.abs(yDistance) < size.height;
+
+    if (horizontalCheck && verticalCheck) {
+      return true;
+    }
+    return false;
   }
 
   update() {

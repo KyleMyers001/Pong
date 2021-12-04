@@ -42,20 +42,14 @@ class Player extends Rectangle {
     }
   }
 
-  draw(): void {
+  update() {
     if(this.direction === 'up'  && this.point.y > this.velocity.y) {
       this.point.y -= this.velocity.y;
     } else if(this.direction === 'down' && this.point.y < (this.canvasSize.height - this.size.height - this.velocity.y)) {
       this.point.y += this.velocity.y;
     }
-
-    this.context.beginPath()
-    this.context.rect(this.point.x, this.point.y, this.size.width, this.size.height);
-    this.context.fillStyle = this.color;
-    this.context.fill();
-    this.context.stroke();
+    this.draw();
   }
-
 }
 
 export default Player;
