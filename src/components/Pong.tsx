@@ -4,6 +4,12 @@ import Player from '../classes/Player';
 import Score from '../classes//Score';
 import * as React from 'react';
 
+// TODO: Refactor code, remove functionality out of class component. 
+// Use React hooks, and modularize the code.
+
+// TODO: Need to add winning conditions
+
+// TODO: Should add feature to display control scheme
 class Pong extends React.Component {
   // 1 ball
   // 1 AI rectangle
@@ -20,33 +26,37 @@ class Pong extends React.Component {
   player: Player;
   playerScore: Score;
   predictiveBall: Ball; // Used by the AI for predicting the ball's inevitable location.
+  gameHeader: React.RefObject<HTMLDivElement>;
   constructor(props: any) {
     super(props);
+    this.gameHeader = React.createRef();
   }
 
   componentDidMount() {
     this.active = false;
     this.canvas = document.querySelector('#canvas');
     this.canvas.width = this.canvas.parentElement.clientWidth;
+    this.canvas.height = window.innerHeight - this.gameHeader.current.clientHeight;
     this.context = this.canvas.getContext('2d');
     this.ball = this.generateBall();
     this.player = this.generatePlayer();
     this.ai = this.generateAI();
     this.playerScore = this.generatePlayerScore();
     this.aiScore = this.generateAIScore();
-    this.startGame();
   }
 
   render() {
     return (
-      <div className="container">
-        <h1 className="has-text-centered">Pong</h1>
-        <button id="btnPauseGame" className="btn btn--primary" onClick={this.pauseGame.bind(this)}>Pause</button>
-        <button id="btnStartGame" className="btn btn--primary" onClick={this.startGame.bind(this)}>Start</button>
-        <br />
-        <br />
+      <section className="container">
+        <div ref={this.gameHeader} >
+          <h1 className="has-text-centered">Pong</h1>
+          <button id="btnPauseGame" className="btn btn--primary" onClick={this.pauseGame.bind(this)}>Pause</button>
+          <button id="btnStartGame" className="btn btn--primary" onClick={this.startGame.bind(this)}>Start</button>
+          <br />
+          <br />
+        </div>
         <canvas id="canvas" className="canvas canvas--pong" width="1080" height="600"></canvas>
-      </div>
+      </section>
     )
   }
 
@@ -104,6 +114,7 @@ class Pong extends React.Component {
     // This is what the AI follows.
     // It should spawn where the current ball is when the player and the ball connect.
     // The speed of this ball should be slightly faster, and going in the same direction.
+    // let scale = this.canvas.width / 15;
     let size = 20;
     let x = this.ball.x;
     let y = this.ball.y;
@@ -131,7 +142,8 @@ class Pong extends React.Component {
         this.ball.xVelocity = -this.ball.xVelocity;
       }
 
-      if(collidedWithPlayer) {
+      if(collidedWithPlayer) { // TODO: Figure out what I was doing with the predictive ball.  
+        // This code is likely redundant (not working)
         // generate predictive ball
         this.predictiveBall = this.generatePredictiveBall();
       }
@@ -141,7 +153,7 @@ class Pong extends React.Component {
         console.log(this.predictiveBall);
       }
 
-      this.context.clearRect(0, 0, innerWidth, innerHeight);
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.player.draw();
       this.aiScore.draw();
       this.ai.moveTowardsBall(this.ball);

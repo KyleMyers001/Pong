@@ -1,12 +1,13 @@
 @import './partials/variables.css';
 @import './partials/utilities.css';
-@import './partials/header.css';
-@import './partials/footer.css';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 body,
 html {
   color: var(--text-dark);
-  font-family: 'Source Sans Pro', TimesNewRoman, 'Times New Roman';
+  font-family: 'Press Start 2P', cursive;
   margin: 0;
   padding: 0;
 }
@@ -17,6 +18,11 @@ a {
 
 button {
   cursor: pointer;
+}
+
+h1 {
+  margin: 0;
+  padding-top: 16px;
 }
 
 .canvas {
