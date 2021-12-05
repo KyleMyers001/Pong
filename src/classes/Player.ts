@@ -13,15 +13,10 @@ class Player extends Rectangle {
     this.active = true;
     this.canvasSize = canvaSize;
     this.velocity = velocity;
-
-    window.addEventListener('keydown', (e) => {
-      this.startAnimation(e);
-    });
-
-    window.addEventListener('keyup', (e) => {
-      this.stopAnimation();
-    });
-
+    
+    // TODO: Refactor these event listeners
+    window.addEventListener('keydown', (e) => this.startAnimation(e));
+    window.addEventListener('keyup', (e) => this.stopAnimation());
   }
 
   startAnimation(e: KeyboardEvent): void {

@@ -26,9 +26,6 @@ h1 {
 }
 
 .canvas {
-  border-radius: 6px;
-}
-
-.canvas--pong {
   background-color: #111;
+  border-radius: 6px;
 }

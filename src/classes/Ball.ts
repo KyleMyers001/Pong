@@ -13,7 +13,7 @@ class Ball extends Rectangle {
     this.velocity = velocity;
   }
 
-  detectCollision(point: Point, size: Size) { // TODO: Fix issue with collision not working properly.  
+  detectCollision(point: Point, size: Size): Boolean { // TODO: Fix issue with collision not working properly.  
     const xDistance = this.point.x - point.x;
     const yDistance = this.point.y - point.y;
     const horizontalCheck = Math.abs(xDistance) < size.width;
@@ -25,7 +25,7 @@ class Ball extends Rectangle {
     return false;
   }
 
-  update() {
+  update(): void {
     if ((this.point.y + this.size.height) >= this.canvasSize.height || this.point.y <= 0) {
       this.velocity.y = -this.velocity.y;
     }

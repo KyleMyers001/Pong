@@ -1,6 +1,6 @@
 .btn {
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
   margin-right: 4px;
@@ -9,13 +9,16 @@
 }
 
 .btn--primary {
-  background-color: var(--site-primary);
-  border: darken(var(--site-primary), 10%);
+  background-color: var(--color-primary);
+  border: 2px solid var(--color-primary);
   color: white;
+  outline: none;
 }
 
 .btn--primary:hover {
-  background-color: var(--site-primary-hover);
+  background-color: var(--color-tertiary);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .container {
@@ -27,26 +30,6 @@
 
 .has-text-centered {
   text-align: center;
-}
-
-.is-primary,
-.is-primary,
-.is-primary {
-  background-color: var(--site-primary);
-  color: white;
-}
-
-.is-primary a,
-.is-primary button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  text-decoration: none;
-}
-
-.is-primary a:hover,
-.is-primary button:hover {
-  background-color: var(--site-primary-hover);
 }
 
 .section {
