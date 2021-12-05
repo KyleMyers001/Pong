@@ -2,12 +2,12 @@ import AI from '../classes/AI';
 import Ball from '../classes/Ball';
 import GameScore from '../classes/GameScore';
 import Player from '../classes/Player';
-
+import Size from '../interfaces/Size';
 // TODO: Need to add winning conditions
 
 // TODO: Should add feature to display control scheme
 
-// TODO: Make the AI possible to beat
+// TODO: Make the AI possible to beat. 
 
 class Game {
   ai: AI;
@@ -27,7 +27,7 @@ class Game {
     this.gameScore = new GameScore(this.context, this.getCanvasSize());
   }
 
-  getCanvasSize() { 
+  getCanvasSize(): Size { 
     return { width: this.canvas.width, height: this.canvas.height };
   }
 
@@ -52,7 +52,7 @@ class Game {
     return new AI('#ffffff', this.context, point, size, velocity);
   }
 
-  animate() {
+  animate(): void {
     if (this.active) {
       let collidedWithAi = this.ball.detectCollision(this.ai.point, this.ai.size);
       let collidedWithPlayer = this.ball.detectCollision(this.player.point, this.player.size);
@@ -72,7 +72,7 @@ class Game {
     }
   }
 
-  redraw() {
+  redraw(): void {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.player.update();
     this.gameScore.draw();
@@ -81,6 +81,7 @@ class Game {
   }
 
   start(): void {
+    if(this.active) return;
     this.active = true;
     this.player.active = true;
     this.animate();

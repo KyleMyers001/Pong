@@ -24,7 +24,7 @@ const Pong = () => {
         <br />
         <br />
       </div>
-      <canvas ref={canvasRef} id="canvas" className="canvas canvas--pong" width="1080" height="600"></canvas>
+      <canvas ref={canvasRef} id="canvas" className="canvas" width="1080" height="600"></canvas>
     </section>
   )
 }

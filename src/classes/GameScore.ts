@@ -27,19 +27,19 @@ class GameScore {
     this.aiScore.draw();
   }
 
-  hasScored(ball: Ball, canvasSize: Size) {
+  hasScored(ball: Ball, canvasSize: Size): Boolean {
     return this.playerScored(ball) || this.aiScored(ball, canvasSize);
   }
 
-  playerScored(ball: Ball) { 
+  playerScored(ball: Ball): Boolean { 
     return ball.point.x <= 0 
   }
 
-  aiScored(ball: Ball, canvasSize: Size) {
+  aiScored(ball: Ball, canvasSize: Size): Boolean {
     return (ball.point.x + ball.size.width) >= canvasSize.width 
   }
 
-  update(ball: Ball, canvasSize: Size) {
+  update(ball: Ball, canvasSize: Size): void {
     if (this.aiScored(ball, canvasSize)) {
       this.aiScore.amount += 1;
     } else if (this.playerScored(ball)) {
