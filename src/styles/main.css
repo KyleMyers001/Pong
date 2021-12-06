@@ -1,8 +1,5 @@
 @import './partials/variables.css';
 @import './partials/utilities.css';
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
 
 body,
 html {

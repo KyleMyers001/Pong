@@ -31,7 +31,7 @@ export default {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  // coverageProvider: "v8",
+  coverageProvider: "v8",
 
     // Jest transformations -- this adds support for TypeScript
   // using ts-jest
@@ -39,9 +39,6 @@ export default {
     "^.+\\.tsx?$": "ts-jest"
   },
 
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   setupFiles: ["jest-canvas-mock"],
   testEnvironment: "jsdom"
   // A list of reporter names that Jest uses when writing coverage reports
