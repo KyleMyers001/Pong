@@ -9,7 +9,7 @@
     "build": "webpack --mode development",
     "build:prod": "webpack --mode production",
     "watch": "webpack --watch",
-    "test": "jest"
+    "test": "jest --watchAll"
   },
   "author": "Kyle Myers",
   "license": "ISC",
