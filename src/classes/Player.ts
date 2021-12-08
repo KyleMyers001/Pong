@@ -13,19 +13,14 @@ class Player extends Rectangle {
     this.active = true;
     this.canvasSize = canvaSize;
     this.velocity = velocity;
-    
-    // TODO: Refactor these event listeners
-    window.addEventListener('keydown', (e) => this.startAnimation(e));
-    window.addEventListener('keyup', (e) => this.stopAnimation());
   }
 
-  startAnimation(e: KeyboardEvent): void {
+  startAnimation(key): void {
     if (this.active) {
-      const key = e.key.toLowerCase();
-      if (key === 'w' && this.point.y > this.velocity.y) {
+      if (key === 'w') {
         this.direction = 'up';
       }
-      else if (key === 's' && this.point.y < (this.canvasSize.height - this.size.height - this.velocity.y)) {
+      else if (key === 's') {
         this.direction = 'down';
       }
     }
