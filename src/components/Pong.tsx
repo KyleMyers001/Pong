@@ -7,13 +7,11 @@ const Pong = () => {
   let game: Game, canvas: HTMLCanvasElement;
 
   useEffect(() => {
-    if(!game) {
-      canvas = canvasRef.current;
-      canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = window.innerHeight - gameHeaderRef.current.clientHeight;
-      game = new Game(canvas);
-    }
-  });
+    canvas = canvasRef.current;
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = window.innerHeight - gameHeaderRef.current.clientHeight;
+    game = new Game(canvas);
+  }, []);
 
   return (
     <section className="container">

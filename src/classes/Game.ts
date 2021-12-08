@@ -1,5 +1,6 @@
 import AI from '../classes/AI';
 import Ball from '../classes/Ball';
+import Controls from '../classes/Controls';
 import GameScore from '../classes/GameScore';
 import Player from '../classes/Player';
 import Size from '../interfaces/Size';
@@ -9,10 +10,16 @@ import Size from '../interfaces/Size';
 
 // TODO: Make the AI possible to beat. 
 
+// TODO: Find a way to make the velocity of the game objects scale better at different resolutions
+// Make the game fast paced.
+
+// Maybe use hard coded settings for different resolutions instead of calculations.  
+// Or find better calculations.
 class Game {
   ai: AI;
   active: boolean;
   ball: Ball;
+  controls: Controls;
   canvas: HTMLCanvasElement;
   context: any;
   player: Player;
@@ -21,10 +28,27 @@ class Game {
     this.active = false;
     this.canvas = canvas;
     this.context = this.canvas.getContext('2d');
+    this.initializeObjects();
+    this.controls = new Controls(this);
+  }
+
+  initializeObjects() {
     this.ball = this.createBall();
     this.player = this.createPlayer();
     this.ai = this.createAI();
-    this.gameScore = new GameScore(this.context, this.getCanvasSize());
+    let playerTotal = 0, aiTotal = 0;
+    if(this.gameScore) {
+      playerTotal = this.gameScore.playerScore.amount;
+      aiTotal = this.gameScore.aiScore.amount;
+    }
+    this.gameScore = new GameScore(this.context, this.getCanvasSize(), aiTotal, playerTotal);
+    this.redraw();
+  }
+
+  reset() {
+    this.gameScore = null;
+    this.initializeObjects();
+    this.pause();
   }
 
   getCanvasSize(): Size { 
@@ -33,7 +57,7 @@ class Game {
 
   createBall(): Ball {
     let point = { x: this.canvas.width / 2, y: this.canvas.height / 2 };
-    let velocity = { x: 15, y: 15 };
+    let velocity = { x: this.canvas.width / 60, y: this.canvas.height / 60 };
     let size = { width: 25, height: 25 };
     return new Ball('#ffffff', this.context, point, size, this.getCanvasSize(), velocity, );
   }  
@@ -46,7 +70,7 @@ class Game {
   }
 
   createAI(): AI {
-    let velocity = { x: 0, y: 15 };
+    let velocity = { x: 0, y: this.canvas.width / 105 };
     let size = { width: 25, height: 100 };
     let point = { x: 25, y: this.canvas.height / 2 - (size.height / 2)};
     return new AI('#ffffff', this.context, point, size, velocity);

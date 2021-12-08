@@ -6,20 +6,20 @@ class GameScore {
   aiScore: Score;
   context: any;
   playerScore: Score;
-  constructor(context: any, canvasSize: Size) {
+  constructor(context: any, canvasSize: Size, aiTotal: number, playerTotal: number) {
     this.context = context;
-    this.aiScore = this.createAIScore(canvasSize);
-    this.playerScore = this.createPlayerScore(canvasSize);
+    this.aiScore = this.createAIScore(canvasSize, aiTotal);
+    this.playerScore = this.createPlayerScore(canvasSize, playerTotal);
   }
 
-  createAIScore(canvasSize: Size): Score {
+  createAIScore(canvasSize: Size, total: number): Score {
     let point = { x: canvasSize.width / 2 - 100, y: 60 };
-    return new Score(0, '#ffffff', this.context, '30px Arial', point);
+    return new Score(total, '#ffffff', this.context, '30px Arial', point);
   }
 
-  createPlayerScore(canvasSize: Size): Score {
+  createPlayerScore(canvasSize: Size, total: number): Score {
     let point = { x: canvasSize.width / 2 + 100, y: 60 };
-    return new Score(0, '#ffffff', this.context, '30px Arial', point);
+    return new Score(total, '#ffffff', this.context, '30px Arial', point);
   }
 
   draw() {
