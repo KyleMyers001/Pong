@@ -1,5 +1,6 @@
 import Game from '../classes/Game';
 import React, { useEffect, useRef, useState } from 'react';
+import './Pong.css';
 
 const Pong = () => {
   const canvasRef = useRef(null);
@@ -14,15 +15,15 @@ const Pong = () => {
   }, []);
 
   return (
-    <section className="container">
+    <section className="pong">
       <div ref={gameHeaderRef} >
-        <h1 className="has-text-centered">Pong</h1>
-        <button id="btnPauseGame" className="btn btn--primary" onClick={() => game.pause()}>Pause</button>
-        <button id="btnStartGame" className="btn btn--primary" onClick={() => game.start()}>Start</button>
+        <h1 className="pong__header">Pong</h1>
+        <button className="pong__btn" onClick={() => game.pause()}>Pause</button>
+        <button className="pong__btn" onClick={() => game.start()}>Start</button>
         <br />
         <br />
       </div>
-      <canvas ref={canvasRef} id="canvas" className="canvas" width="1080" height="600"></canvas>
+      <canvas ref={canvasRef} className="pong__canvas" width="1080" height="600"></canvas>
     </section>
   )
 }

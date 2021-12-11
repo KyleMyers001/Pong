@@ -1,0 +1,35 @@
+.pong {
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 32px 0;
+  position: relative;
+  width: 1300px;
+}
+
+.pong__btn {
+  background-color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 4px;
+  outline: none;
+  padding: 10px 20px;
+  transition: background-color 0.2s;
+}
+
+.pong__btn:hover {
+  background-color: var(--color-tertiary);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.pong__header {
+  text-align: center;
+}
+
+.pong__canvas {
+  background-color: #111;
+  border-radius: 6px;
+}

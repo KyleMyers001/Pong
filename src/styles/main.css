@@ -1,5 +1,4 @@
 @import './partials/variables.css';
-@import './partials/utilities.css';
 
 body,
 html {
@@ -20,9 +19,4 @@ button {
 h1 {
   margin: 0;
   padding-top: 16px;
-}
-
-.canvas {
-  background-color: #111;
-  border-radius: 6px;
 }
