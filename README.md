@@ -4,9 +4,19 @@
 ### Description
 This project is an endeavor to recreate the renowned 2D table-tennis themed arcade game.  This version is currently in the developmental stages, with much work to be done.
 
-
 ### Technologies
 This project is built primarily with React and TypeScript. The game is rendered on an HTML Canvas.
+
+### Getting Started
+```
+npm install
+npm start
+```
+
+### Running Tests
+```
+npm test
+```
 
 ### Future Plans
 1. Adding winning conditions
