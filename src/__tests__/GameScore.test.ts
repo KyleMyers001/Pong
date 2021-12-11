@@ -10,7 +10,7 @@ const createCanvas = () => {
 
 const game = new Game(createCanvas());
 const canvasSize = game.getCanvasSize();
-const midPointX = game.canvas.width / 2;
+const noOneScoredX = game.canvas.width / 2;
 const playerScoredX = -100;
 const aiScoredX = game.canvas.width + game.ball.size.width;
 
@@ -26,7 +26,7 @@ describe('Has Scored', () => {
   });
 
   it('Should be false if no one scored', () => {
-    game.ball.point.x = midPointX;
+    game.ball.point.x = noOneScoredX;
     expect(game.gameScore.hasScored(game.ball, canvasSize)).toEqual(false);
   });
 });
@@ -38,7 +38,7 @@ describe('Player Scored', () => {
   });
 
   it('Should be false', () => {
-    game.ball.point.x = midPointX;
+    game.ball.point.x = noOneScoredX;
     expect(game.gameScore.playerScored(game.ball)).toEqual(false);
   });
 });
@@ -50,7 +50,7 @@ describe('AI Scored', () => {
   });
 
   it('Should be false', () => {
-    game.ball.point.x = midPointX;
+    game.ball.point.x = noOneScoredX;
     expect(game.gameScore.aiScored(game.ball, canvasSize)).toEqual(false);
   });
 });
@@ -72,14 +72,14 @@ describe('Update', () => {
 
   it('Should not modify the Player score', () => {
     const originalScore = game.gameScore.playerScore.amount;
-    game.ball.point.x = midPointX;
+    game.ball.point.x = noOneScoredX;
     game.gameScore.update(game.ball, canvasSize);
     expect(game.gameScore.playerScore.amount).toEqual(originalScore);
   });
 
   it('Should not modify the AI score', () => {
     const originalScore = game.gameScore.aiScore.amount;
-    game.ball.point.x = midPointX;
+    game.ball.point.x = noOneScoredX;
     game.gameScore.update(game.ball, canvasSize);
     expect(game.gameScore.aiScore.amount).toEqual(originalScore);
   });
