@@ -17,41 +17,41 @@ const aiScoredX = game.canvas.width + game.ball.size.width;
 describe('Has Scored', () => {
   it('Should be true if AI Scored', () => {
     game.ball.point.x = aiScoredX;
-    expect(game.gameScore.hasScored(game.ball, canvasSize)).toEqual(true);
+    expect(game.gameScore.hasScored(game.ball, canvasSize)).toBeTruthy();
   });
 
   it('Should be true if player scored', () => {
     game.ball.point.x = playerScoredX;
-    expect(game.gameScore.hasScored(game.ball, canvasSize)).toEqual(true);
+    expect(game.gameScore.hasScored(game.ball, canvasSize)).toBeTruthy();
   });
 
   it('Should be false if no one scored', () => {
     game.ball.point.x = noOneScoredX;
-    expect(game.gameScore.hasScored(game.ball, canvasSize)).toEqual(false);
+    expect(game.gameScore.hasScored(game.ball, canvasSize)).toBeFalsy();
   });
 });
 
 describe('Player Scored', () => {
   it('Should be true', () => {
     game.ball.point.x = playerScoredX;
-    expect(game.gameScore.playerScored(game.ball)).toEqual(true);
+    expect(game.gameScore.playerScored(game.ball)).toBeTruthy();
   });
 
   it('Should be false', () => {
     game.ball.point.x = noOneScoredX;
-    expect(game.gameScore.playerScored(game.ball)).toEqual(false);
+    expect(game.gameScore.playerScored(game.ball)).toBeFalsy();
   });
 });
 
 describe('AI Scored', () => {
   it('Should be true', () => {
     game.ball.point.x = aiScoredX;
-    expect(game.gameScore.aiScored(game.ball, canvasSize)).toEqual(true);
+    expect(game.gameScore.aiScored(game.ball, canvasSize)).toBeTruthy();
   });
 
   it('Should be false', () => {
     game.ball.point.x = noOneScoredX;
-    expect(game.gameScore.aiScored(game.ball, canvasSize)).toEqual(false);
+    expect(game.gameScore.aiScored(game.ball, canvasSize)).toBeFalsy();
   });
 });
 
