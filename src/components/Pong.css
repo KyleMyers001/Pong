@@ -25,11 +25,11 @@
   color: var(--color-primary);
 }
 
-.pong__header {
-  text-align: center;
-}
-
 .pong__canvas {
   background-color: #111;
   border-radius: 6px;
+}
+
+.pong__header {
+  text-align: center;
 }
